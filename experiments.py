@@ -4,6 +4,16 @@ import scipy.stats as ss
 
 
 def test_significance_level(reject_fn, n_iter=1000, n=500, d=200):
+    """Computes observed significance level of given test.
+    Args:
+        reject_fn (function(points1, points2)): Function (given test) that rejects H0.
+        n_iter (int): Number of samples to test on.
+        n (int): Number of points in each sample.
+        d (int): Dimentionality of points.
+    
+    Returns:
+        float: Observed significance level.
+    """
     n1 = n // 2
     n2 = n - n1
     # H0 is true
@@ -16,6 +26,16 @@ def test_significance_level(reject_fn, n_iter=1000, n=500, d=200):
 
 
 def power_mean_experiment(tests: tuple, n_iter=100, n1=250, n2=250):
+    """Experiment with two normal distributions with different means and unit variance. Plots the results.
+    Args:
+        tests (tuple[function]): Tests to experiment on.
+        n_iter (int): Number of experiments per graph point (per dimentionality).
+        n1 (int): Number of first class points
+        n2 (int): Number of second class points
+    
+    Returns:
+        None
+    """
     means = np.logspace(np.log10(0.05), np.log10(50), 20, dtype=np.float32)
     x = np.logspace(0.5, 2.0, 20, dtype=np.float32)
     plot_points = [[] for test in tests]
@@ -37,6 +57,16 @@ def power_mean_experiment(tests: tuple, n_iter=100, n1=250, n2=250):
 
 
 def power_var_experiment(tests: list, n_iter=100, n1=250, n2=250):
+    """Experiment with two normal distributions with mean = 0 and different variance. Plots the results.
+    Args:
+        tests (tuple[function]): Tests to experiment on.
+        n_iter (int): Number of experiments per graph point (per dimentionality).
+        n1 (int): Number of first class points
+        n2 (int): Number of second class points
+    
+    Returns:
+        None
+    """
     sigmas = np.logspace(0.01, 1.0, 20, base=10)
     x = np.logspace(0.5, 2.0, 20)
     plot_points = [[] for test in tests]
