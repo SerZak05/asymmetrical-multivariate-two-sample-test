@@ -25,7 +25,7 @@ def test_significance_level(reject_fn, n_iter=1000, n=500, d=200):
     return rej_cnt / n_iter
 
 
-def power_mean_experiment(tests: tuple, n_iter=100, n1=250, n2=250):
+def power_mean_experiment(tests: list, n_iter=100, n1=250, n2=250):
     """Experiment with two normal distributions with different means and unit variance. Plots the results.
     Args:
         tests (tuple[function]): Tests to experiment on.
@@ -45,8 +45,8 @@ def power_mean_experiment(tests: tuple, n_iter=100, n1=250, n2=250):
         for mean in means:
             rej_cnts = np.zeros(len(tests))
             for _ in range(n_iter):
-                points1 = ss.norm.rvs(size=(n1, d))
-                points2 = ss.norm.rvs(loc=mean, size=(n2, d))
+                points1 = ss.norm.rvs(scale=np.sqrt(d), size=(n1, d))
+                points2 = ss.norm.rvs(loc=mean, scale=np.sqrt(d), size=(n2, d))
                 for i, test in enumerate(tests):
                     rej_cnts[i] += test(points1, points2)
             powers += rej_cnts / n_iter
