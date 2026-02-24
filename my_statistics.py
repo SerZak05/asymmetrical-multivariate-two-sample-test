@@ -17,8 +17,8 @@ def compute_l(mask: np.ndarray, A: np.ndarray) -> float:
 def compute_l_torch(mask: torch.Tensor, A: torch.Tensor) -> float:
     """Computes L_n statistic (see def. before Prop.2.1).
     Args:
-        mask (np.ndarray): Bool mask for points in the first class.
-        A (np.ndarray): Adjacency matrix of 1NN graph.
+        mask (torch.Tensor): Bool mask for points in the first class.
+        A (torch.Tensor): Adjacency matrix of 1NN graph.
     
     Returns:
         float: Computed statistic.
@@ -39,8 +39,8 @@ def compute_symm_l(mask: np.ndarray, A: np.ndarray) -> float:
 def compute_symm_l_torch(mask: torch.Tensor, A: torch.Tensor) -> float:
     """Computes L_nk statistic with k = 1.
     Args:
-        mask (np.ndarray): Bool mask for points in the first class.
-        A (np.ndarray): Adjacency matrix of 1NN graph.
+        mask (torch.Tensor): Bool mask for points in the first class.
+        A (torch.Tensor): Adjacency matrix of 1NN graph.
     
     Returns:
         float: Computed statistic.

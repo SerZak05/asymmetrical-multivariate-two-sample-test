@@ -31,7 +31,7 @@ def get_params_torch(n: int, n1: int, A: torch.Tensor) -> tuple[float, float]:
     Args:
         n (int): Number of points.
         n1 (int): Number of points in the first class.
-        A (np.ndarray): Adjacency matrix of 1-NN graph
+        A (torch.Tensor): Adjacency matrix of 1-NN graph
     
     Returns:
         Tuple of mean and variation of normal distribution.
@@ -142,18 +142,18 @@ def reject_asymm_hypo_torch(points1: torch.Tensor, points2: torch.Tensor, alpha:
 
 
 
-def reject_asymm_rev_hypo(points1: np.ndarray, points2: np.ndarray, alpha: float = 0.05) -> bool:
+def reject_asymm_rev_hypo_torch(points1: torch.Tensor, points2: torch.Tensor, alpha: float = 0.05) -> bool:
     """
     Asymptotic test based on asymmetric nearest neighbour type coincidences. Reverses the order of classes.
     Args:
-        points1 (np.ndarray): Second class points.
-        points2 (np.ndarray): First class points.
+        points1 (torch.Tensor): Second class points.
+        points2 (torch.Tensor): First class points.
         alpha (float): Significance level.
     
     Returns:
         bool: True, if H0 is rejected.
     """
-    return reject_asymm_hypo(points2, points1, alpha)
+    return reject_asymm_hypo_torch(points2, points1, alpha)
 
 
 def reject_symm_hypo(points1: np.ndarray, points2: np.ndarray, alpha: float = 0.05) -> bool:
@@ -284,9 +284,8 @@ def reject_mmd2_u_gaussian_hypo_torch(points1: torch.Tensor, points2: torch.Tens
     """
     Asymptotic test based on MMD^2_u statistics. Uses bootstrap to approximate the distribution.
     Args:
-        points1 (np.ndarray): First class points.
-        points2 (np.ndarray): Second class points.
-        mmd_func (function): Function that computes mmd statistics.
+        points1 (torch.Tensor): First class points.
+        points2 (torch.Tensor): Second class points.
         alpha (float): Significance level.
         bootstrap_iters (int): Number of bootstrap samples.
 
